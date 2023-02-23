@@ -44,18 +44,31 @@
     </form>
 
     <?php  
-    $word_to_censor = $_GET['word'];
-    $censored_lyrics = str_ireplace($word_to_censor, '***', $lyrics); 
+    if ($_GET && $_GET['word']) {
+        $word_to_censor = $_GET['word'];
+        $censored_lyrics = str_ireplace($word_to_censor, '***', $lyrics); 
+    }
+
     ?>
 
     <p>
-        <?php echo $censored_lyrics ?>
+         <?php 
+            if ($_GET && $_GET['word']) {
+                echo $censored_lyrics;
+            };
+        ?>
     </p>
     
-    <div>
-        Censored lyrics length is <strong>  <?php echo strlen($censored_lyrics) ?> </strong>
-    </div>
-
+    <?php
+        if ($_GET && $_GET['word']) {
+            echo '<div>';
+            echo 'Censored lyrics length is';
+            echo '<strong>';
+            echo strlen($censored_lyrics);
+            echo '</strong>';
+            echo '</div>';
+        };
+    ?>
 
 </body>
 </html>
